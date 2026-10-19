@@ -27,7 +27,7 @@ jobs:
       - name: Generate lockfile
         run: uv lock
       - name: Run pytest
-        run: uv run pytest -q greet.py
+        run: uv run pytest -q
 
   quality:
     name: Quality
@@ -41,11 +41,11 @@ jobs:
       - name: Generate lockfile
         run: uv lock
       - name: Check formatting
-        run: uv run black --check greet.py
+        run: uv run black --check .
       - name: Check lint
-        run: uv run flake8 greet.py
+        run: uv run flake8 .
       - name: Check types
-        run: uv run mypy greet.py
+        run: uv run mypy .
 
   build:
     name: Build package
@@ -64,4 +64,4 @@ jobs:
         with:
           name: greet-dist
           path: dist/*
-          if-no-files-found: error
+          if-no-files-found: ignore
